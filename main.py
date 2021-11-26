@@ -5,7 +5,10 @@ from discord.ext.tasks import loop
 import datetime
 from pytz import timezone
 from firebase_admin import credentials, firestore, initialize_app
+import requests
+import pandas as pd
 import json
+from util import *
 
 cred = credentials.Certificate('key.json')
 default_app = initialize_app(cred)
@@ -26,41 +29,6 @@ LYRICS = {
 
 client = discord.Client()
 
-def add_channel(guild_id,channel_id):
-	payload = {
-		'guild_id': guild_id,
-		'channel_id': channel_id,
-		'birthdays': []
-	}
-	store.document(guild_id).set(payload)
-	
-
-def remove_channel(guild_id):
-	store.document(guild_id).delete()
-
-
-def get_guilds():
-	return [doc.to_dict() for doc in store.stream()]
-
-
-def add_birthday(guild_id, msg):
-	tokens = msg.split(' ')
-	user = tokens[-2]
-	date = tokens[-1]
-	guild = store.document(guild_id).get().to_dict()
-	guild['birthdays'].append({
-		'user': user,
-		'date': date
-	})
-	store.document(guild_id).set(guild)
-
-
-def get_birthday(guild, date):
-	for bday in guild['birthdays']:
-		if date == bday['date']:
-			return bday['user']
-	return None
-
 
 @client.event
 async def on_ready():
@@ -73,26 +41,25 @@ async def on_message(message):
 		return
 
 	if message.content.startswith('!goodbye brain'):
-		with open('cmd_list.txt', 'r') as f:
-			data = f.read()
-		await message.channel.send(data)
+		await message.channel.send(goodbye_brain())
 
 	if message.content.startswith('!goodbye vocal chords'):
-		with open('lyrics.txt', 'r') as f:
-			data = f.read()
-		await message.channel.send(data)
+		await message.channel.send(goodbye_vocal_chords())
+	
+	if message.content.startswith('!goodbye johns'):
+		await message.channel.send(goodbye_johns())
 
 	if message.content.startswith('!goodbye birthday train'):
-		with open('channel.txt', 'w') as f:
-			add_channel(f'{message.guild.id}', f'{message.channel.id}')
+		add_channel(store, f'{message.guild.id}', f'{message.channel.id}')
 		await message.channel.send('Birthday Train has been set up')
 
 	if message.content.startswith('!goodbye millia hp'):
-		remove_channel(f'{message.guild.id}')
+		remove_channel(store, f'{message.guild.id}')
 		await message.channel.send('Birthday Train has already gone')
 
 	if message.content.startswith('!goodbye one year of your life'):
-		add_birthday(f'{message.guild.id}', message.content)
+		user = add_birthday(store, f'{message.guild.id}', message.content)
+		await message.channel.send(f'{user} has boarded the Birthday Train')
 
 	if message.content.startswith('!goodbye friends'):
 		await message.channel.send(file=discord.File('no_friends.html'), content='And this is why we don\'t use self destruct')
@@ -103,27 +70,8 @@ async def on_message(message):
 	if message.content.startswith('!goodbye felix'):
 		await message.channel.send('I\'M A FOOL\nI KNOW NOTHING\nI MAY SOUND LIKE A SILLY CLOWN\nAND I WILL TURN MY BACK ON LIFE\nhttps://streamable.com/qxqb9a')
 
-
-	if message.content.startswith('!goodbye test'):
-		if message.content.startswith('!goodbye test guilds'):
-			print(get_guilds())
-		elif message.content.startswith('!goodbye test train'):
-			await test_train()
-
-
-async def test_train():
-	tz = timezone('America/New_York')
-	now = datetime.datetime.now(tz)
-	day = now.strftime("%A")
-	for guild in get_guilds():
-		channel = client.get_channel(int(guild['channel_id']))
-		user = get_birthday(guild, now.strftime("%m-%d"))
-		if user is not None:
-			msg = LYRICS['Birthday']
-			await channel.send(file=discord.File('Birthday Train.mp3'), content=f'{msg} {user}')
-		elif day in LYRICS.keys():
-			await channel.send(file=discord.File('Birthday Train.mp3'), content=LYRICS[day])
-
+	if message.content.startswith('!goodbye primos'):
+		await message.channel.send(goodbye_primos())
 
 
 @loop(minutes=1)
