@@ -50,24 +50,27 @@ def goodbye_johns():
 	with open('johns.txt', 'r') as f:
 		return f.read()
 
+
 def goodbye_primos():
 	characters = requests.get('https://api.genshin.dev/characters/all').json()
 	weapons = requests.get('https://api.genshin.dev/weapons/all').json()
 
 	pool = []
 	for character in characters:
-		pool.append({
-			'name': character['name'],
-			'rarity': character['rarity']
-		})
+		if character['name'] not in ('Traveler', 'Aloy'):
+			pool.append({
+				'name': character['name'],
+				'rarity': character['rarity']
+			})
 	for weapon in weapons:
-		pool.append({
-			'name': weapon['name'],
-			'rarity': weapon['rarity']
-		})
-
+		if weapon['location'] == 'Gacha':
+			pool.append({
+				'name': weapon['name'],
+				'rarity': weapon['rarity']
+			})
 	df = pd.DataFrame(pool)
+	print(df)
 	star_pull = random.choices([5,4,3], [0.6, 5.1, 94.3], k=1)
 	star_set = df[df['rarity'] == star_pull[0]]['name'].to_list()
 	item_pull = random.choices(star_set, k=1)
-	return f'Congratulations! You pulled a(n) {item_pull[0]}!'
+	return f'Congratulations! You pulled: {item_pull[0]}!'

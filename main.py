@@ -73,6 +73,12 @@ async def on_message(message):
 	if message.content.startswith('!goodbye primos'):
 		await message.channel.send(goodbye_primos())
 
+	if message.content.startswith('!goodbye padoru'):
+		await message.channel.send(file=discord.File('padoru.gif'), content='hashire sori yo\nkaze no you ni\ntsukimihara wo\npadoru padoru')
+
+	if message.content.startswith('!goodbye test'):
+		await bdt()
+
 
 @loop(minutes=1)
 async def bdt():
@@ -80,7 +86,7 @@ async def bdt():
 	now = datetime.datetime.now(tz)
 	day = now.strftime("%A")
 	if now.strftime('%H:%M') == '16:20':
-		for guild in get_guilds():
+		for guild in get_guilds(store):
 			channel = client.get_channel(int(guild['channel_id']))
 			user = get_birthday(guild, now.strftime("%m-%d"))
 			if user is not None:
