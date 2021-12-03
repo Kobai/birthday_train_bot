@@ -76,6 +76,9 @@ async def on_message(message):
 	if message.content.startswith('!goodbye padoru'):
 		await message.channel.send(file=discord.File('padoru.gif'), content='hashire sori yo\nkaze no you ni\ntsukimihara wo\npadoru padoru')
 
+	if message.content.startswith('!goodbye patch notes'):
+		await message.channel.send(goodbye_patch_notes())
+
 	if message.content.startswith('!goodbye test'):
 		await bdt()
 

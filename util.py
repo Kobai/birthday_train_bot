@@ -74,3 +74,8 @@ def goodbye_primos():
 	star_set = df[df['rarity'] == star_pull[0]]['name'].to_list()
 	item_pull = random.choices(star_set, k=1)
 	return f'Congratulations! You pulled: {item_pull[0]}!'
+
+def goodbye_patch_notes():
+	res = requests.get('https://api.github.com/repos/Kobai/birthday_train_bot/commits').json()
+	commit_msg = res[0]["commit"]["message"]
+	return f'```Patch Notes:\n{commit_msg}```'
