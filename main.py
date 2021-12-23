@@ -79,6 +79,9 @@ async def on_message(message):
 	if message.content.startswith('!goodbye patch notes'):
 		await message.channel.send(goodbye_patch_notes())
 
+	if message.content.startswith('!goodbye time'):
+		await message.channel.send('https://discord.com/channels/381473336250859520/630461683617234964/876190243919892560')
+
 	if message.content.startswith('!goodbye test'):
 		await bdt()
 
