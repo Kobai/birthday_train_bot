@@ -10,7 +10,7 @@ import pandas as pd
 import json
 from util import *
 
-cred = credentials.Certificate('key.json')
+cred = credentials.Certificate('secrets/key.json')
 default_app = initialize_app(cred)
 db = firestore.client()
 store = db.collection('data')
@@ -62,7 +62,7 @@ async def on_message(message):
 		await message.channel.send(f'{user} has boarded the Birthday Train')
 
 	if message.content.startswith('!goodbye friends'):
-		await message.channel.send(file=discord.File('no_friends.html'), content='And this is why we don\'t use self destruct')
+		await message.channel.send(file=discord.File('res/no_friends.html'), content='And this is why we don\'t use self destruct')
 	
 	if message.content.startswith('!goodbye inputs'):
 		await message.channel.send('INPUTS WEAVE INTO A SPIRE OF FLAME\nhttps://www.youtube.com/watch?v=EhgDibw7vB4')
@@ -97,9 +97,9 @@ async def bdt():
 			user = get_birthday(guild, now.strftime("%m-%d"))
 			if user is not None:
 				msg = LYRICS['Birthday']
-				await channel.send(file=discord.File('Birthday Train.mp3'), content=f'{msg} {user}')
+				await channel.send(file=discord.File('res/Birthday Train.mp3'), content=f'{msg} {user}')
 			elif day in LYRICS.keys():
-				await channel.send(file=discord.File('Birthday Train.mp3'), content=LYRICS[day])
+				await channel.send(file=discord.File('res/Birthday Train.mp3'), content=LYRICS[day])
 
 
 @bdt.before_loop
@@ -108,6 +108,6 @@ async def bdt_before():
 
 
 bdt.start()
-with open('token.txt', 'r') as f:
+with open('secrets/token.txt', 'r') as f:
 	token = f.read()
 client.run(token)

@@ -3,8 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 run.txt
-key.json
-token.txt
+secrets/*
 
 # C extensions
 *.so

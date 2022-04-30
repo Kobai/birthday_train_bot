@@ -41,13 +41,13 @@ def get_birthday(guild, date):
 
 
 def goodbye_brain():
-	with open('cmd_list.txt', 'r') as f:
+	with open('res/cmd_list.txt', 'r') as f:
 		return f.read()
 def goodbye_vocal_chords():
-	with open('lyrics.txt', 'r') as f:
+	with open('res/lyrics.txt', 'r') as f:
 		return f.read()
 def goodbye_johns():
-	with open('johns.txt', 'r') as f:
+	with open('res/johns.txt', 'r') as f:
 		return f.read()
 
 
