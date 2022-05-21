@@ -57,7 +57,7 @@ async def on_message(message):
 		remove_channel(store, f'{message.guild.id}')
 		await message.channel.send('Birthday Train has already gone')
 
-	if message.content.startswith('!goodbye one year of your life'):
+	if message.content.startswith('!goodbye boomer'):
 		user = add_birthday(store, f'{message.guild.id}', message.content)
 		await message.channel.send(f'{user} has boarded the Birthday Train')
 
@@ -66,6 +66,9 @@ async def on_message(message):
 	
 	if message.content.startswith('!goodbye inputs'):
 		await message.channel.send('INPUTS WEAVE INTO A SPIRE OF FLAME\nhttps://www.youtube.com/watch?v=EhgDibw7vB4')
+
+	if message.content.startswith('!goodbye reactions'):
+		await message.channel.send(file=discord.File('res/reaction.gif'))
 		
 	if message.content.startswith('!goodbye felix'):
 		await message.channel.send('I\'M A FOOL\nI KNOW NOTHING\nI MAY SOUND LIKE A SILLY CLOWN\nAND I WILL TURN MY BACK ON LIFE\nhttps://streamable.com/qxqb9a')
@@ -74,7 +77,7 @@ async def on_message(message):
 		await message.channel.send(goodbye_primos())
 
 	if message.content.startswith('!goodbye padoru'):
-		await message.channel.send(file=discord.File('padoru.gif'), content='hashire sori yo\nkaze no you ni\ntsukimihara wo\npadoru padoru')
+		await message.channel.send(file=discord.File('res/padoru.gif'), content='hashire sori yo\nkaze no you ni\ntsukimihara wo\npadoru padoru')
 
 	if message.content.startswith('!goodbye patch notes'):
 		await message.channel.send(goodbye_patch_notes())

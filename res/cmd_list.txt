@@ -1,9 +1,10 @@
 !goodbye birthday train: add daily birthday train message to channel
 !goodbye vocal chords: sing along to your favorite song
 !goodbye millia hp: remove daily birthday train message from channel
-!goodbye one year of your life <@user> <zero_padding month-day (eg 04-20)>: add user's birthday to birthday list
+!goodbye boomer <@user> <zero_padding month-day (eg 04-20)>: add user's birthday to birthday list
 !goodbye friends: say I won't stall for 60 turns
 !goodbye inputs: the super smash staple
+!goodbye reactions: we all know that guy 
 !goodbye felix: the one jump to rule them all
 !goodbye johns: it's only player skill if you win
 !goodbye primos: mihoyo taketh
