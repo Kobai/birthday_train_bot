@@ -9,6 +9,8 @@ import requests
 import pandas as pd
 import json
 from util import *
+import asyncio 
+import random 
 
 cred = credentials.Certificate('secrets/key.json')
 default_app = initialize_app(cred)
@@ -65,9 +67,17 @@ async def on_message(message):
 		await message.channel.send(file=discord.File('res/no_friends.html'), content='And this is why we don\'t use self destruct')
 	
 	if message.content.startswith('!goodbye inputs'):
-		await message.channel.send('INPUTS WEAVE INTO A SPIRE OF FLAME\nhttps://www.youtube.com/watch?v=EhgDibw7vB4')
+		choice = random.choices([0,1,2], [0.3, 0.3, 0.4], k=1)[0]
+		if choice == 0:
+			await message.channel.send('INPUTS WEAVE INTO A SPIRE OF FLAME\nhttps://www.youtube.com/watch?v=EhgDibw7vB4')
+		elif choice == 0:
+			await asyncio.sleep(10)
+			await message.channel.send('INPUTS WEAVE INTO A SPIRE OF FLAME\nhttps://www.youtube.com/watch?v=EhgDibw7vB4')
+		else:
+			return
 
 	if message.content.startswith('!goodbye reactions'):
+		await asyncio.sleep(10)
 		await message.channel.send(file=discord.File('res/reaction.gif'))
 		
 	if message.content.startswith('!goodbye felix'):
