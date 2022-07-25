@@ -84,7 +84,11 @@ async def on_message(message):
 		await message.channel.send('I\'M A FOOL\nI KNOW NOTHING\nI MAY SOUND LIKE A SILLY CLOWN\nAND I WILL TURN MY BACK ON LIFE\nhttps://streamable.com/qxqb9a')
 
 	if message.content.startswith('!goodbye primos'):
-		await message.channel.send(goodbye_primos())
+		n = message.content.split(' ')[-1] 
+		if n == 'primos':
+			n = 1
+		n = int(n)
+		await message.channel.send('\n'.join([goodbye_primos() for _ in range(n)]))
 
 	if message.content.startswith('!goodbye padoru'):
 		await message.channel.send(file=discord.File('res/padoru.gif'), content='hashire sori yo\nkaze no you ni\ntsukimihara wo\npadoru padoru')

@@ -7,7 +7,7 @@
 !goodbye reactions: we all know that guy 
 !goodbye felix: the one jump to rule them all
 !goodbye johns: it's only player skill if you win
-!goodbye primos: mihoyo taketh
+!goodbye primos <optional number>: mihoyo taketh
 !goodbye padoru: deleting this in january
 !goodbye patch notes: better than arcsys
 !goodbye time: back to the training lab

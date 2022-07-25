@@ -69,7 +69,6 @@ def goodbye_primos():
 				'rarity': weapon['rarity']
 			})
 	df = pd.DataFrame(pool)
-	print(df)
 	star_pull = random.choices([5,4,3], [0.6, 5.1, 94.3], k=1)
 	star_set = df[df['rarity'] == star_pull[0]]['name'].to_list()
 	item_pull = random.choices(star_set, k=1)
