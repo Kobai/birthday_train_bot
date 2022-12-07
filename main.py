@@ -70,7 +70,7 @@ async def on_message(message):
 		choice = random.choices([0,1,2], [0.3, 0.3, 0.4], k=1)[0]
 		if choice == 0:
 			await message.channel.send('INPUTS WEAVE INTO A SPIRE OF FLAME\nhttps://www.youtube.com/watch?v=EhgDibw7vB4')
-		elif choice == 0:
+		elif choice == 1:
 			await asyncio.sleep(10)
 			await message.channel.send('INPUTS WEAVE INTO A SPIRE OF FLAME\nhttps://www.youtube.com/watch?v=EhgDibw7vB4')
 		else:
@@ -95,6 +95,10 @@ async def on_message(message):
 
 	if message.content.startswith('!goodbye patch notes'):
 		await message.channel.send(goodbye_patch_notes())
+
+	if message.content.startswith('!goodbye gear'):
+		url = message.attachments[0].url
+		await message.channel.send(call_gear_score(url))
 
 	if message.content.startswith('!goodbye time'):
 		await message.channel.send('https://discord.com/channels/381473336250859520/630461683617234964/876190243919892560')

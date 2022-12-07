@@ -1,0 +1,12 @@
+stat,stat_type,multiplier
+attack,%,1
+health,%,1
+defense,%,1
+effectiveness,%,1
+effect resistance,%,1
+critical hit chance,%,1.6
+critical hit damage,%,1.1
+speed,flat,2
+attack,flat,0.1
+health,flat,0.01
+defense,flat,0.16667
